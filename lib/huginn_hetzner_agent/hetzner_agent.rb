@@ -132,7 +132,7 @@ module Agents
               create_event payload: server
             end
           else
-            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil,", ": null,")
+            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null")
             last_status = JSON.parse(last_status)
             payload.each do | server |
               found = false
