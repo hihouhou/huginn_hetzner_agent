@@ -126,13 +126,13 @@ module Agents
       payload = JSON.parse(response.body)
 
       if interpolated['changes_only'] == 'true'
-        if payload.to_s != memory['last_status']
+        if payload != memory['last_status']
           if "#{memory['last_status']}" == ''
             payload.each do | server |
               create_event payload: server
             end
           else
-            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null")
+            last_status = memory['last_status']
             last_status = JSON.parse(last_status)
             payload.each do | server |
               found = false
@@ -146,12 +146,12 @@ module Agents
               end
             end
           end
-          memory['last_status'] = payload.to_s
+          memory['last_status'] = payload
         end
       else
         create_event payload: payload
-        if payload.to_s != memory['last_status']
-          memory['last_status'] = payload.to_s
+        if payload != memory['last_status']
+          memory['last_status'] = payload
         end
       end
     end
