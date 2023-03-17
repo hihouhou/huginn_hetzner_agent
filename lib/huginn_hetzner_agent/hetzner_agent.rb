@@ -133,7 +133,6 @@ module Agents
             end
           else
             last_status = memory['last_status']
-            last_status = JSON.parse(last_status)
             payload.each do | server |
               found = false
               last_status.each do | serverbis|
